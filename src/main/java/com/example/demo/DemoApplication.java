@@ -17,19 +17,4 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
     }
 
-    @Autowired
-    private DataSource dataSource;
-
-    @Bean
-    public Jdbi jdbi(DataSource dataSource) {
-        // JDBI wants to control the Connection wrap the datasource in a proxy
-        // That is aware of the Spring managed transaction
-        TransactionAwareDataSourceProxy dataSourceProxy = new TransactionAwareDataSourceProxy(dataSource);
-        Jdbi jdbi = Jdbi.create(dataSourceProxy);
-        jdbi.installPlugins();
-
-        jdbi.registerRowMapper(Order.class, ConstructorMapper.of(Order.class));
-
-        return jdbi;
-    }
 }
