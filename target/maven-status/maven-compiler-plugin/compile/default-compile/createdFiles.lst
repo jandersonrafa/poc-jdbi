@@ -1,6 +1,7 @@
 com/example/demo/jdbi/model/Order.class
 com/example/demo/jdbc/controller/JdbcController.class
 com/example/demo/jdbi/repository/OrderFluentRepository.class
+com/example/demo/jdbi/model/item.class
 com/example/demo/jdbi/controller/DeclarativeController.class
 com/example/demo/jdbi/config/LogSqlFactory.class
 com/example/demo/jdbc/model/Order.class

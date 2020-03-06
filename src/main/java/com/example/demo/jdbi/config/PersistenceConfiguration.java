@@ -5,14 +5,16 @@
  */
 package com.example.demo.jdbi.config;
 
-import com.example.demo.jdbi.model.Order;
-import javax.sql.DataSource;
+import com.example.demo.model.Item;
+import com.example.demo.model.Order;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.mapper.reflect.ConstructorMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
+
+import javax.sql.DataSource;
 
 /**
  *
@@ -33,6 +35,7 @@ public class PersistenceConfiguration {
         jdbi.installPlugins();
 
         jdbi.registerRowMapper(Order.class, ConstructorMapper.of(Order.class));
+        jdbi.registerRowMapper(Item.class, ConstructorMapper.of(Item.class));
 
         return jdbi;
     }
