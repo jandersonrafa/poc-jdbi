@@ -1,0 +1,6 @@
+jpa anotations
+declarative api
+fluent api
+batch
+map to entity
+http://jdbi.org/
