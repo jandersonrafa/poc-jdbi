@@ -72,7 +72,8 @@ public class OrderRepository {
             order.setSix(rs.getString(7));
             order.setSeven(rs.getString(8));
             order.setEight(rs.getString(9));
-            order.setTen(rs.getString(10));
+            order.setNine(rs.getString(10));
+            order.setTen(rs.getString(11));
             return order;
         };
     }

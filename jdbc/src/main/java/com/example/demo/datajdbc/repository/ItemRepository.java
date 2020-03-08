@@ -48,17 +48,17 @@ public class ItemRepository {
         return (ResultSet rs, int i) -> {
             Item Item = new Item();
             Item.setId(rs.getString(1));
-            Item.setOrderid(rs.getString(1));
-            Item.setOne(rs.getString(1));
-            Item.setTwo(rs.getString(1));
-            Item.setTree(rs.getString(1));
-            Item.setFour(rs.getString(1));
-            Item.setFive(rs.getString(1));
-            Item.setSix(rs.getString(1));
-            Item.setSeven(rs.getString(1));
-            Item.setEight(rs.getString(1));
-            Item.setNine(rs.getString(1));
-            Item.setTen(rs.getString(1));
+            Item.setOrderid(rs.getString(2));
+            Item.setOne(rs.getString(3));
+            Item.setTwo(rs.getString(4));
+            Item.setTree(rs.getString(5));
+            Item.setFour(rs.getString(6));
+            Item.setFive(rs.getString(7));
+            Item.setSix(rs.getString(7));
+            Item.setSeven(rs.getString(9));
+            Item.setEight(rs.getString(10));
+            Item.setNine(rs.getString(11));
+            Item.setTen(rs.getString(12));
             return Item;
         };
     }

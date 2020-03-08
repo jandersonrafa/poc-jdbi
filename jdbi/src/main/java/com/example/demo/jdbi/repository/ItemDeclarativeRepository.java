@@ -27,7 +27,7 @@ public interface ItemDeclarativeRepository {
 
     @SqlBatch("INSERT INTO items(id, orderid, one, two, tree, four, five, six, seven, eight, nine, ten) " +
             "   VALUES (:id, :orderid, :one, :two, :tree, :four, :five, :six, :seven, :eight, :nine, :ten)")
-    @BatchChunkSize(1000)
+//    @BatchChunkSize(1000)
     void insertList(@BindBean List<Item> orders);
 
     @SqlQuery("SELECT * FROM items ORDER BY amount")
