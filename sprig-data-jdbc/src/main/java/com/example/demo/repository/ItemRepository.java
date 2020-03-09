@@ -19,6 +19,6 @@ public interface ItemRepository extends CrudRepository<Items, String > {
     @Modifying
     @Transactional
     @Query("delete from Items u where u.orderid = :orderid")
-    void deleteByOrderid(@Param("orderid") String orderid);
+    int deleteByOrderid(@Param("orderid") String orderid);
 
 }

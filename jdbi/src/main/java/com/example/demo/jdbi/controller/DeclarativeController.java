@@ -10,6 +10,7 @@ import com.example.demo.jdbi.repository.OrderDeclarativeRepository;
 import com.example.demo.model.Item;
 import com.example.demo.model.Order;
 import com.example.demo.util.OrderUtil;
+import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.statement.PreparedBatch;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,44 +82,67 @@ public class DeclarativeController {
                         .add();
             });
             batch.execute();
-            insertListItem(itens);
+            insertListItem(jdbi.open(), itens);
         }, "insert-batch");
     }
 
-    private void insertListItem(List<Item> itens) {
-        PreparedBatch batch2 = jdbi.open().prepareBatch("INSERT INTO items(id, orderid, one, two, tree, four, five, six, seven, eight, nine, ten)  VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+    @GetMapping("/insert-all-one-by-one")
+    public void insertBatchAllOneByOne() {
+        run(() -> {
+            System.out.println("# JDBC - INSERT BATCH WITH NUMBER ORDERS= " + NUMBERS_ORDERS);
+            for (int i = 0; i < NUMBERS_ORDERS; i++) {
+                Order order = orderUtil.createRandomOrderWith5Itens();
+                jdbi.useExtension(OrderDeclarativeRepository.class, repository -> repository.insertBean(order));
+                order.getItens().forEach(it -> jdbi.useExtension(ItemDeclarativeRepository.class, repository -> repository.insertBean(it)));
+            }
+        }, "insert-all-one-by-one");
+    }
+
+    private void insertListItem(Handle open, List<Item> itens) {
+        PreparedBatch batch = open.prepareBatch("INSERT INTO items(id, orderid, one, two, tree, four, five, six, seven, eight, nine, ten)  VALUES (:id, :orderid, :one, :two, :tree, :four, :five, :six, :seven, :eight, :nine, :ten)");
         itens.forEach(o -> {
-            batch2.bind(0, o.getId())
-                    .bind(1, o.getOrderid())
-                    .bind(2, o.getOne())
-                    .bind(3, o.getTwo())
-                    .bind(4, o.getTree())
-                    .bind(5, o.getFour())
-                    .bind(6, o.getFive())
-                    .bind(7, o.getSix())
-                    .bind(8, o.getSeven())
-                    .bind(9, o.getEight())
-                    .bind(10, o.getNine())
-                    .bind(11, o.getTen())
+            batch.bind("id", o.getId())
+                    .bind("orderid", o.getOrderid())
+                    .bind("one", o.getOne())
+                    .bind("two", o.getTwo())
+                    .bind("tree", o.getTree())
+                    .bind("four", o.getFour())
+                    .bind("five", o.getFive())
+                    .bind("six", o.getSix())
+                    .bind("seven", o.getSeven())
+                    .bind("eight", o.getEight())
+                    .bind("nine", o.getNine())
+                    .bind("ten", o.getTen())
                     .add();
         });
-        batch2.execute();
+        batch.execute();
     }
 
     @GetMapping("/full-test")
     public void fullTest() {
+        Handle open = jdbi.open();
         run(() -> {
             for (int i = 0; i < NUMBERS_ORDERS; i++) {
                 Order order = orderUtil.createRandomOrderWith5Itens();
                 jdbi.useExtension(OrderDeclarativeRepository.class, repository -> repository.insertBean(order));
-//                insertListItem(order.getItens());
-                jdbi.useExtension(ItemDeclarativeRepository.class, repository -> repository.insertList(order.getItens()));
+                insertListItemOneByOne(order);
+//                insertListItem(open, order.getItens());
+//                jdbi.useExtension(ItemDeclarativeRepository.class, repository -> repository.insertList(order.getItens()));
                 Order orderSaved = jdbi.withExtension(OrderDeclarativeRepository.class, repository -> repository.findById(order.getId()));
-                jdbi.useExtension(ItemDeclarativeRepository.class, repository -> repository.findByOrderId(order.getId()));
-                jdbi.useExtension(ItemDeclarativeRepository.class, repository -> repository.deleteByOrderId(order.getId()));
-                jdbi.useExtension(OrderDeclarativeRepository.class, repository -> repository.deleteById(order.getId()));
+                orderSaved.getId();
+                Set<Item> items = jdbi.withExtension(ItemDeclarativeRepository.class, repository -> repository.findByOrderId(order.getId()));
+                items.forEach(it-> it.getOrderid());
+                int count = jdbi.withExtension(ItemDeclarativeRepository.class, repository -> repository.deleteByOrderId(order.getId()));
+                int counto = jdbi.withExtension(OrderDeclarativeRepository.class, repository -> repository.deleteById(order.getId()));
             }
         }, "full-test");
+        open.close();
+    }
+
+    private void insertListItemOneByOne(Order order) {
+        order.getItens().forEach(it -> {
+            jdbi.useExtension(ItemDeclarativeRepository.class, repository -> repository.insertBean(it));
+        });
     }
 
     @GetMapping("/select-all-one-by-one")
@@ -165,7 +189,7 @@ public class DeclarativeController {
     }
 
     private void run(Runnable run, String word) {
-        System.out.println("# JDBC DECLARATIVE - " + word);
+        System.out.println("# JDBI DECLARATIVE - " + word);
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
         run.run();

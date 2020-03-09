@@ -1,7 +1,7 @@
-C:\Repositorios\poc-jdbi\sprig-data-jdbc\src\main\java\com\example\demo\model\Items.java
-C:\Repositorios\poc-jdbi\sprig-data-jdbc\src\main\java\com\example\demo\model\Orders.java
-C:\Repositorios\poc-jdbi\sprig-data-jdbc\src\main\java\com\example\demo\datajdbc\repository\ItemRepository.java
-C:\Repositorios\poc-jdbi\sprig-data-jdbc\src\main\java\com\example\demo\datajdbc\repository\OrderRepository.java
-C:\Repositorios\poc-jdbi\sprig-data-jdbc\src\main\java\com\example\demo\SpringDataJdbcApplication.java
-C:\Repositorios\poc-jdbi\sprig-data-jdbc\src\main\java\com\example\demo\datajdbc\controller\SpringDataJdbcController.java
-C:\Repositorios\poc-jdbi\sprig-data-jdbc\src\main\java\com\example\demo\util\OrderUtil.java
+/home/janderson/colombo/others-projects/poc-jdbi/sprig-data-jdbc/src/main/java/com/example/demo/util/OrderUtil.java
+/home/janderson/colombo/others-projects/poc-jdbi/sprig-data-jdbc/src/main/java/com/example/demo/controller/SpringDataJdbcController.java
+/home/janderson/colombo/others-projects/poc-jdbi/sprig-data-jdbc/src/main/java/com/example/demo/repository/OrderRepository.java
+/home/janderson/colombo/others-projects/poc-jdbi/sprig-data-jdbc/src/main/java/com/example/demo/model/Items.java
+/home/janderson/colombo/others-projects/poc-jdbi/sprig-data-jdbc/src/main/java/com/example/demo/repository/ItemRepository.java
+/home/janderson/colombo/others-projects/poc-jdbi/sprig-data-jdbc/src/main/java/com/example/demo/SpringDataJdbcApplication.java
+/home/janderson/colombo/others-projects/poc-jdbi/sprig-data-jdbc/src/main/java/com/example/demo/model/Orders.java

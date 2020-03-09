@@ -76,17 +76,32 @@ public class JdbcController {
         }, "insert-batch");
     }
 
+    @GetMapping("/insert-all-one-by-one")
+    public void insertBatchAllOneByOne() {
+        run(() -> {
+            System.out.println("# JDBC - INSERT BATCH WITH NUMBER ORDERS= " + NUMBERS_ORDERS);
+            for (int i = 0; i < NUMBERS_ORDERS; i++) {
+                Order order = orderUtil.createRandomOrderWith5Itens();
+                orderRepository.save(order);
+                order.getItens().forEach(itemRepository::save);
+            }
+        }, "insert-all-one-by-one");
+    }
+
     @GetMapping("/full-test")
     public void fullTest() {
         run(() -> {
             for (int i = 0; i < NUMBERS_ORDERS; i++) {
                 Order order = orderUtil.createRandomOrderWith5Itens();
                 orderRepository.save(order);
-                itemRepository.saveAll(order.getItens());
-                Order orderSaved = orderRepository.findById(order.getId());
-                itemRepository.findByOrderId(order.getId());
-                itemRepository.deleteByOrderId(orderSaved.getId());
-                orderRepository.deleteById(orderSaved.getId());
+//                itemRepository.saveAll(order.getItens());
+                itemRepository.saveAllOneByOne(order.getItens());
+                Order oSaved = orderRepository.findById(order.getId());
+                oSaved.getId();
+                Set<Item> items = itemRepository.findByOrderId(order.getId());
+                items.forEach(it -> it.getOrderid());
+                int count = itemRepository.deleteByOrderId(oSaved.getId());
+                int counto = orderRepository.deleteById(oSaved.getId());
             }
         }, "full-test");
     }

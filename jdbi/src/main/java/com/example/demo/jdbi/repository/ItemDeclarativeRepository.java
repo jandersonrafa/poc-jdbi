@@ -5,12 +5,10 @@
  */
 package com.example.demo.jdbi.repository;
 
-import com.example.demo.jdbi.config.LogSqlFactory;
 import com.example.demo.model.Item;
 import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
-import org.jdbi.v3.sqlobject.statement.BatchChunkSize;
 import org.jdbi.v3.sqlobject.statement.SqlBatch;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
@@ -38,9 +36,14 @@ public interface ItemDeclarativeRepository {
     void deleteById(@Bind("id") String id);
 
     @SqlUpdate("DELETE FROM items WHERE orderid = :orderid")
-    void deleteByOrderId(@Bind("orderid") String orderid);
+    int deleteByOrderId(@Bind("orderid") String orderid);
 
     @SqlQuery("SELECT * FROM items WHERE orderid = :orderid")
     @RegisterBeanMapper(Item.class)
     Set<Item> findByOrderId(@Bind("orderid") String orderid);
+
+    @SqlUpdate("INSERT INTO items(id, orderid, one, two, tree, four, five, six, seven, eight, nine, ten) " +
+            "   VALUES (:id, :orderid, :one, :two, :tree, :four, :five, :six, :seven, :eight, :nine, :ten)")
+    int insertBean(@BindBean Item user);
+
 }

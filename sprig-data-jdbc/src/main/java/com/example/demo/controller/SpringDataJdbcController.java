@@ -5,13 +5,12 @@
  */
 package com.example.demo.controller;
 
-import com.example.demo.repository.ItemRepository;
-import com.example.demo.repository.OrderRepository;
 import com.example.demo.model.Items;
 import com.example.demo.model.Orders;
+import com.example.demo.repository.ItemRepository;
+import com.example.demo.repository.OrderRepository;
 import com.example.demo.util.OrderUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -75,16 +74,31 @@ public class SpringDataJdbcController {
         }, "insert-batch");
     }
 
+    @GetMapping("/insert-all-one-by-one")
+    public void insertBatchAllOneByOne() {
+        run(() -> {
+            System.out.println("# SPRING DATA JDBC - INSERT BATCH WITH NUMBER ORDERS= " + NUMBERS_ORDERS);
+            for (int i = 0; i < NUMBERS_ORDERS; i++) {
+                Orders order = orderUtil.createRandomOrderWith5Itens();
+                orderRepository.save(order);
+                order.getItens().forEach(it -> itemRepository.save(it));
+            }
+        }, "insert-all-one-by-one");
+    }
+
     @GetMapping("/full-test")
-    @Transactional
+//    @Transactional
     public void fullTest() {
         run(() -> {
             for (int i = 0; i < NUMBERS_ORDERS; i++) {
                 Orders orders = orderUtil.createRandomOrderWith5Itens();
-                orderRepository.save(orders);
-                itemRepository.saveAll(orders.getItens());
+                Orders save = orderRepository.save(orders);
+                save.getId();
+                orders.getItens().forEach(it -> itemRepository.save(it));
+//                Iterable<Items> items = itemRepository.saveAll(orders.getItens());
                 Orders ordersSaved = orderRepository.findById(orders.getId()).get();
-                itemRepository.findByOrderid(orders.getId());
+                List<Items> itemsSaved = itemRepository.findByOrderid(orders.getId());
+                itemsSaved.forEach(it -> it.getId());
                 delete(ordersSaved.getId());
             }
         }, "full-test");
@@ -102,7 +116,6 @@ public class SpringDataJdbcController {
     }
 
     @GetMapping("/delete-all-one-by-one")
-    @Transactional
     public void deleteAllOneByOne() {
         List<String> orders = this.getOrderIds();
         run(() -> {
@@ -113,7 +126,7 @@ public class SpringDataJdbcController {
     }
 
     public void delete(String o) {
-        itemRepository.deleteByOrderid(o);
+        int count = itemRepository.deleteByOrderid(o);
         orderRepository.deleteById(o);
     }
 

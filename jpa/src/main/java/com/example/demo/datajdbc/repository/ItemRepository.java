@@ -9,6 +9,6 @@ public interface ItemRepository extends JpaRepository<Items, String > {
 
     List<Items> findByOrderid(String id);
 
-    void deleteByOrderid(String id);
+    int deleteByOrderid(String id);
 
 }

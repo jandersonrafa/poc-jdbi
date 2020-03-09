@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.domain.Persistable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -25,7 +26,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Orders {
+public class Orders  implements Persistable {
 
     @Id
     private String id;
@@ -44,4 +45,8 @@ public class Orders {
     @Transient
     private List<Items> itens;
 
+    @Override
+    public boolean isNew() {
+        return true;
+    }
 }
