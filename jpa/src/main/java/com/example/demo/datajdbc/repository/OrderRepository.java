@@ -11,10 +11,6 @@ public interface OrderRepository extends JpaRepository<Orders, String> {
     @Query(value = "SELECT id FROM orders", nativeQuery = true)
     Set<OrderPK> findAllIds();
 
-//    @Getter
-//    @Setter
-//    @AllArgsConstructor
-//    @NoArgsConstructor
     public static interface OrderPK {
         String getId();
     }

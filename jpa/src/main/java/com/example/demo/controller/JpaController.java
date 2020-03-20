@@ -14,7 +14,6 @@ import com.example.demo.util.OrderUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,26 +42,6 @@ public class JpaController {
 
     @Autowired
     private OrderService orderService;
-
-
-
-    @GetMapping("/insert")
-    public String insert() {
-        return orderRepository.save(orderUtil.createRandomOrderWith5Itens()).getId();
-    }
-
-    @GetMapping("/get/{id}")
-    public Orders getById(@PathVariable String id) {
-        System.out.println("# JPA - GET BY ID #");
-        return orderRepository.findById(id).get();
-    }
-
-    @GetMapping("/all")
-    public void findAll() {
-        run(() -> {
-            Iterable<Orders> all = orderRepository.findAll();
-        }, "all");
-    }
 
     @GetMapping("/insert-batch")
     public void insertBatch() {
@@ -103,12 +82,7 @@ public class JpaController {
                 ordersSaved.getId();
                 List<Items> byOrderid = itemRepository.findByOrderid(orders.getId());
                 byOrderid.forEach(Items::getId);
-//                entityManager.flush();
-//                entityManager.clear();
-//                int count = itemRepository.deleteByOrderid(orders.getId());
-//                orderRepository.deleteById(orders.getId());
-//                entityManager.flush();
-//                entityManager.clear();
+                orderService.deleteAllOneByOne(orders.getId());
             }
         }, "full-test");
     }

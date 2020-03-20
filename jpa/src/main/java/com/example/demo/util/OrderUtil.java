@@ -12,7 +12,6 @@ import java.util.concurrent.ThreadLocalRandom;
 @Component
 public class OrderUtil {
 
-
     public Orders createRandomOrderWith5Itens() {
         double amount = ThreadLocalRandom.current().nextDouble(1000.00);
         Orders orders = new Orders();

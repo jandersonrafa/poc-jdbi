@@ -13,7 +13,6 @@ import com.example.demo.util.OrderUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,24 +38,6 @@ public class SpringDataJdbcController {
 
     @Autowired
     private OrderUtil orderUtil;
-
-    @GetMapping("/insert")
-    public String insert() {
-        return orderRepository.save(orderUtil.createRandomOrderWith5Itens()).getId();
-    }
-
-    @GetMapping("/get/{id}")
-    public Orders getById(@PathVariable String id) {
-        System.out.println("# JDBC - GET BY ID #");
-        return orderRepository.findById(id).get();
-    }
-
-    @GetMapping("/all")
-    public void findAll() {
-        run(() -> {
-            Iterable<Orders> all = orderRepository.findAll();
-        }, "all");
-    }
 
     @GetMapping("/insert-batch")
     public void insertBatch() {
@@ -87,7 +68,6 @@ public class SpringDataJdbcController {
     }
 
     @GetMapping("/full-test")
-//    @Transactional
     public void fullTest() {
         run(() -> {
             for (int i = 0; i < NUMBERS_ORDERS; i++) {
@@ -95,7 +75,6 @@ public class SpringDataJdbcController {
                 Orders save = orderRepository.save(orders);
                 save.getId();
                 orders.getItens().forEach(it -> itemRepository.save(it));
-//                Iterable<Items> items = itemRepository.saveAll(orders.getItens());
                 Orders ordersSaved = orderRepository.findById(orders.getId()).get();
                 List<Items> itemsSaved = itemRepository.findByOrderid(orders.getId());
                 itemsSaved.forEach(it -> it.getId());

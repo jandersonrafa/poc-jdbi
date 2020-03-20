@@ -20,7 +20,6 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-//@AllArgsConstructor
 public class Order {
 
     private String id;
@@ -36,26 +35,5 @@ public class Order {
     private String nine;
     private String ten;
     private List<Item> itens;
-
-//    @JdbiConstructor
-    public Order(String id, BigDecimal amount) {
-        this.id = id;
-        this.amount = amount;
-    }
-
-    public Order(String id, BigDecimal amount, String one, String two, String tree, String four, String five, String six, String seven, String eight, String nine, String ten) {
-        this.id = id;
-        this.amount = amount;
-        this.one = one;
-        this.two = two;
-        this.tree = tree;
-        this.four = four;
-        this.five = five;
-        this.six = six;
-        this.seven = seven;
-        this.eight = eight;
-        this.nine = nine;
-        this.ten = ten;
-    }
 
 }

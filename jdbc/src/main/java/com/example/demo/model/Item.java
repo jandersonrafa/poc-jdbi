@@ -16,7 +16,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-//@AllArgsConstructor
 public class Item {
 
     private String id;
@@ -31,20 +30,5 @@ public class Item {
     private String eight;
     private String nine;
     private String ten;
-
-    public Item(String id, String orderid, String one, String two, String tree, String four, String five, String six, String seven, String eight, String nine, String ten) {
-        this.id = id;
-        this.orderid = orderid;
-        this.one = one;
-        this.two = two;
-        this.tree = tree;
-        this.four = four;
-        this.five = five;
-        this.six = six;
-        this.seven = seven;
-        this.eight = eight;
-        this.nine = nine;
-        this.ten = ten;
-    }
 
 }

@@ -3,56 +3,29 @@ package com.example.demo.datajdbc.repository;
 import com.example.demo.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Repository
-//@Transactional
 public class ItemRepository {
 
     private static final String INSERT_FULL = "INSERT INTO items(id,  orderid, one, two, tree, four, five, six, seven, eight, nine, ten) VALUES (:id,  :orderid, :one, :two, :tree, :four, :five, :six, :seven, :eight, :nine, :ten);";
     private static final String SELECT_QUERY = "SELECT id FROM items";
     private static final String SELECT_QUERY_BY_ORDER_ID = "SELECT * FROM items WHERE orderid=:orderid";
-
     private static final String DELETE_BY_ORDER_ID = "DELETE FROM Items WHERE orderid=:orderid";
 
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-
-    public List<Item> findAll() {
-        return namedParameterJdbcTemplate.query(SELECT_QUERY, new BeanPropertyRowMapper(Item.class));
-    }
 
     public Set<Item> findByOrderId(String orderid) {
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("orderid", orderid);
         List<Item> query = namedParameterJdbcTemplate.query(SELECT_QUERY_BY_ORDER_ID, parametros, new BeanPropertyRowMapper(Item.class));
         return query.stream().collect(Collectors.toSet());
-    }
-
-    private RowMapper<Item> mapper() {
-        return (ResultSet rs, int i) -> {
-            Item Item = new Item();
-            Item.setId(rs.getString(1));
-            Item.setOrderid(rs.getString(2));
-            Item.setOne(rs.getString(3));
-            Item.setTwo(rs.getString(4));
-            Item.setTree(rs.getString(5));
-            Item.setFour(rs.getString(6));
-            Item.setFive(rs.getString(7));
-            Item.setSix(rs.getString(7));
-            Item.setSeven(rs.getString(9));
-            Item.setEight(rs.getString(10));
-            Item.setNine(rs.getString(11));
-            Item.setTen(rs.getString(12));
-            return Item;
-        };
     }
 
     public void saveAll(List<Item> Items) {

@@ -13,16 +13,12 @@ import com.example.demo.util.OrderUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author janderson
@@ -41,24 +37,6 @@ public class JdbcController {
 
     @Autowired
     private OrderUtil orderUtil;
-
-    @GetMapping("/insert")
-    public String insert() {
-        return orderRepository.save(this.createRandomOrder()).getId();
-    }
-
-    @GetMapping("/get/{id}")
-    public Order getById(@PathVariable String id) {
-        System.out.println("# JDBC - GET BY ID #");
-        return orderRepository.findById(id);
-    }
-
-    @GetMapping("/all")
-    public void findAll() {
-        run(() -> {
-            List<Order> all = orderRepository.findAll();
-        }, "all");
-    }
 
     @GetMapping("/insert-batch")
     public void insertBatch() {
@@ -94,7 +72,6 @@ public class JdbcController {
             for (int i = 0; i < NUMBERS_ORDERS; i++) {
                 Order order = orderUtil.createRandomOrderWith5Itens();
                 orderRepository.save(order);
-//                itemRepository.saveAll(order.getItens());
                 itemRepository.saveAllOneByOne(order.getItens());
                 Order oSaved = orderRepository.findById(order.getId());
                 oSaved.getId();
@@ -126,11 +103,6 @@ public class JdbcController {
                 orderRepository.deleteById(o);
             });
         }, "delete-all-one-by-one");
-    }
-
-    private Order createRandomOrder() {
-        double amount = ThreadLocalRandom.current().nextDouble(1000.00);
-        return new Order(UUID.randomUUID().toString(), BigDecimal.valueOf(amount));
     }
 
     private List<String> getOrderIds() {

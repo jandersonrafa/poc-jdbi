@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-//@Transactional
 public class OrderRepository {
 
     private static final String INSERT_ORDER_FULL_QUERY = "INSERT INTO orders(id, amount, one, two, tree, four, five, six, seven, eight, nine, ten) VALUES (:id, :amount, :one, :two, :tree, :four, :five,:six, :seven, :eight, :nine, :ten);";
@@ -25,11 +24,6 @@ public class OrderRepository {
 
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-
-    public List<Order> findAll() {
-
-        return namedParameterJdbcTemplate.query(SELECT_ORDERS_QUERY, new BeanPropertyRowMapper(Order.class));
-    }
 
     public List<String> findAllIds() {
         return namedParameterJdbcTemplate.query(SELECT_ORDERS_QUERY, (rs, rowNum) -> rs.getString(1));
