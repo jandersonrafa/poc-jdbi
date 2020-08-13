@@ -1,4 +1,4 @@
-package com.example.demo.datajdbc.repository;
+package com.example.demo.repository;
 
 import com.example.demo.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,20 +13,11 @@ import java.util.stream.Collectors;
 @Repository
 public class ItemRepository {
 
-    private static final String INSERT_FULL = "INSERT INTO items(id,  orderid, one, two, tree, four, five, six, seven, eight, nine, ten) VALUES (:id,  :orderid, :one, :two, :tree, :four, :five, :six, :seven, :eight, :nine, :ten);";
-    private static final String SELECT_QUERY = "SELECT id FROM items";
-    private static final String SELECT_QUERY_BY_ORDER_ID = "SELECT * FROM items WHERE orderid=:orderid";
+    private static final String INSERT_FULL = "INSERT INTO items(orderid, one, two, tree, four, five, six, seven, eight, nine, ten) VALUES ( :orderid, :one, :two, :tree, :four, :five, :six, :seven, :eight, :nine, :ten);";
     private static final String DELETE_BY_ORDER_ID = "DELETE FROM Items WHERE orderid=:orderid";
 
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-
-    public Set<Item> findByOrderId(String orderid) {
-        Map<String, Object> parametros = new HashMap<>();
-        parametros.put("orderid", orderid);
-        List<Item> query = namedParameterJdbcTemplate.query(SELECT_QUERY_BY_ORDER_ID, parametros, new BeanPropertyRowMapper(Item.class));
-        return query.stream().collect(Collectors.toSet());
-    }
 
     public void saveAll(List<Item> Items) {
         List<MapSqlParameterSource> parametros = new ArrayList<>();
@@ -51,16 +42,10 @@ public class ItemRepository {
         namedParameterJdbcTemplate.batchUpdate(INSERT_FULL, parametros.toArray(new MapSqlParameterSource[parametros.size()]));
     }
 
-    public int deleteByOrderId(String orderid) {
+    public int deleteByOrderId(Long orderid) {
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("orderid", orderid);
         return namedParameterJdbcTemplate.update(DELETE_BY_ORDER_ID, parametros);
-    }
-
-    public void saveAllOneByOne(List<Item> Items) {
-        Items.forEach(item -> {
-            save(item);
-        });
     }
 
     public void save(Item item) {

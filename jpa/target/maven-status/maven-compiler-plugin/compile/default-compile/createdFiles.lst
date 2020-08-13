@@ -1,6 +1,7 @@
 com/example/demo/controller/JpaController.class
 com/example/demo/util/OrderUtil.class
 com/example/demo/datajdbc/repository/OrderRepository$OrderPK.class
+com/example/demo/service/OrderService.class
 com/example/demo/JpaApplication.class
 com/example/demo/datajdbc/repository/ItemRepository.class
 com/example/demo/datajdbc/repository/OrderRepository.class

@@ -1,0 +1,68 @@
+### spring data jdbc ##
+2020-07-23 19:38:45.978 DEBUG 6465 --- [nio-2010-exec-1] o.s.jdbc.core.JdbcTemplate               : Executing prepared SQL statement [INSERT INTO orders (amount, active, createddate, createdtime, numberorder, one, two, tree, four, five, six, seven, eight, nine, ten) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+2020-07-23 19:38:46.027 DEBUG 6465 --- [nio-2010-exec-1] o.s.jdbc.core.JdbcTemplate               : Executing prepared SQL statement [INSERT INTO items (orderid, one, two, tree, four, five, six, seven, eight, nine, ten) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+2020-07-23 19:38:46.034 DEBUG 6465 --- [nio-2010-exec-1] o.s.jdbc.core.JdbcTemplate               : Executing prepared SQL statement [INSERT INTO items (orderid, one, two, tree, four, five, six, seven, eight, nine, ten) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+2020-07-23 19:38:46.040 DEBUG 6465 --- [nio-2010-exec-1] o.s.jdbc.core.JdbcTemplate               : Executing prepared SQL statement [INSERT INTO items (orderid, one, two, tree, four, five, six, seven, eight, nine, ten) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+2020-07-23 19:38:46.047 DEBUG 6465 --- [nio-2010-exec-1] o.s.jdbc.core.JdbcTemplate               : Executing prepared SQL statement [INSERT INTO items (orderid, one, two, tree, four, five, six, seven, eight, nine, ten) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+2020-07-23 19:38:46.055 DEBUG 6465 --- [nio-2010-exec-1] o.s.jdbc.core.JdbcTemplate               : Executing prepared SQL statement [INSERT INTO items (orderid, one, two, tree, four, five, six, seven, eight, nine, ten) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+2020-07-23 19:38:46.234 DEBUG 6465 --- [nio-2010-exec-2] o.s.jdbc.core.JdbcTemplate               : Executing prepared SQL statement [SELECT orders.id AS id, orders.two AS two, orders.six AS six, orders.ten AS ten, orders.one AS one, orders.tree AS tree, orders.nine AS nine, orders.four AS four, orders.five AS five, orders.seven AS seven, orders.eight AS eight, orders.amount AS amount, orders.active AS active, orders.numberorder AS numberorder, orders.createdtime AS createdtime, orders.createddate AS createddate FROM orders WHERE orders.id = ?]
+2020-07-23 19:38:46.449 DEBUG 6465 --- [nio-2010-exec-3] o.s.jdbc.core.JdbcTemplate               : Executing prepared SQL statement [UPDATE orders SET amount = ?, active = ?, createddate = ?, createdtime = ?, numberorder = ?, one = ?, two = ?, tree = ?, four = ?, five = ?, six = ?, seven = ?, eight = ?, nine = ?, ten = ? WHERE orders.id = ?]
+2020-07-23 19:38:46.494 DEBUG 6465 --- [nio-2010-exec-4] o.s.jdbc.core.JdbcTemplate               : Executing prepared SQL statement [delete from Items u where u.orderid = ?]
+2020-07-23 19:38:46.510 DEBUG 6465 --- [nio-2010-exec-4] o.s.jdbc.core.JdbcTemplate               : Executing prepared SQL statement [DELETE FROM orders WHERE orders.id = ?]
+
+
+
+## jdbc ##
+2020-07-23 19:44:29.232 DEBUG 7538 --- [nio-2011-exec-1] o.s.jdbc.core.JdbcTemplate               : Executing prepared SQL statement [INSERT INTO orders(amount, one, two, tree, four, five, six, seven, eight, nine, ten, active, numberorder, createddate, createdtime) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?);]
+2020-07-23 19:44:29.348 DEBUG 7538 --- [nio-2011-exec-1] o.s.jdbc.core.JdbcTemplate               : Executing SQL batch update [INSERT INTO items(orderid, one, two, tree, four, five, six, seven, eight, nine, ten) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);]
+2020-07-23 19:44:29.349 DEBUG 7538 --- [nio-2011-exec-1] o.s.jdbc.core.JdbcTemplate               : Executing prepared SQL statement [INSERT INTO items(orderid, one, two, tree, four, five, six, seven, eight, nine, ten) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);]
+2020-07-23 19:44:29.495 DEBUG 7538 --- [nio-2011-exec-2] o.s.jdbc.core.JdbcTemplate               : Executing prepared SQL statement [SELECT * FROM orders WHERE id=?]
+2020-07-23 19:44:29.648 DEBUG 7538 --- [nio-2011-exec-3] o.s.jdbc.core.JdbcTemplate               : Executing prepared SQL statement [UPDATE orders SET amount=?, active=?, createddate=?, createdtime= ?, numberorder=?, one=?, two=?, tree=?, four=?, five=?, six=?, seven=?, eight=?, nine=?, ten=? WHERE id=?]
+2020-07-23 19:44:29.668 DEBUG 7538 --- [nio-2011-exec-4] o.s.jdbc.core.JdbcTemplate               : Executing prepared SQL statement [DELETE FROM Items WHERE orderid=?]
+2020-07-23 19:44:29.671 DEBUG 7538 --- [nio-2011-exec-4] o.s.jdbc.core.JdbcTemplate               : Executing prepared SQL statement [DELETE FROM orders WHERE id=?]
+
+
+## JPA
+ insert     into        orders         (active, amount, createddate, createdtime, eight, five, four, nine, numberorder, one, seven, six, ten, tree, two)     values        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+insert     into        items        (eight, five, four, nine, one, orderid, seven, six, ten, tree, two)     values        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+insert     into        items        (eight, five, four, nine, one, orderid, seven, six, ten, tree, two)     values        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+insert     into        items        (eight, five, four, nine, one, orderid, seven, six, ten, tree, two)     values        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+insert     into        items        (eight, five, four, nine, one, orderid, seven, six, ten, tree, two)     values        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+insert     into        items        (eight, five, four, nine, one, orderid, seven, six, ten, tree, two)     values        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+select        orders0_.id as id1_1_0_,        orders0_.active as active2_1_0_,        orders0_.amount as amount3_1_0_,        orders0_.createddate as createdd4_1_0_,        orders0_.createdtime as createdt5_1_0_,        orders0_.eight as eight6_1_0_,        orders0_.five as five7_1_0_,        orders0_.four as four8_1_0_,        orders0_.nine as nine9_1_0_,        orders0_.numberorder as numbero10_1_0_,        orders0_.one as one11_1_0_,        orders0_.seven as seven12_1_0_,        orders0_.six as six13_1_0_,        orders0_.ten as ten14_1_0_,        orders0_.tree as tree15_1_0_,        orders0_.two as two16_1_0_,     
+		items1_.orderid as orderid12_0_1_,        items1_.id as id1_0_1_,        items1_.id as id1_0_2_,        items1_.eight as eight2_0_2_,        items1_.five as five3_0_2_,        items1_.four as four4_0_2_,        items1_.nine as nine5_0_2_,        items1_.one as one6_0_2_,        items1_.orderid as orderid12_0_2_,        items1_.seven as seven7_0_2_,        items1_.six as six8_0_2_,        items1_.ten as ten9_0_2_,        items1_.tree as tree10_0_2_,        items1_.two as two11_0_2_     from        orders orders0_     left outer join        items items1_             on orders0_.id=items1_.orderid     where        orders0_.id=?
+select        orders0_.id as id1_1_1_,        orders0_.active as active2_1_1_,        orders0_.amount as amount3_1_1_,        orders0_.createddate as createdd4_1_1_,        orders0_.createdtime as createdt5_1_1_,        orders0_.eight as eight6_1_1_,        orders0_.five as five7_1_1_,        orders0_.four as four8_1_1_,        orders0_.nine as nine9_1_1_,        orders0_.numberorder as numbero10_1_1_,        orders0_.one as one11_1_1_,        orders0_.seven as seven12_1_1_,        orders0_.six as six13_1_1_,        orders0_.ten as ten14_1_1_,        orders0_.tree as tree15_1_1_,        orders0_.two as two16_1_1_,       
+		items1_.orderid as orderid12_0_3_,        items1_.id as id1_0_3_,        items1_.id as id1_0_0_,        items1_.eight as eight2_0_0_,        items1_.five as five3_0_0_,        items1_.four as four4_0_0_,        items1_.nine as nine5_0_0_,        items1_.one as one6_0_0_,        items1_.orderid as orderid12_0_0_,        items1_.seven as seven7_0_0_,        items1_.six as six8_0_0_,        items1_.ten as ten9_0_0_,        items1_.tree as tree10_0_0_,        items1_.two as two11_0_0_     from        orders orders0_     left outer join        items items1_             on orders0_.id=items1_.orderid     where        orders0_.id=?
+select        orders0_.id as id1_1_0_,        orders0_.active as active2_1_0_,        orders0_.amount as amount3_1_0_,        orders0_.createddate as createdd4_1_0_,        orders0_.createdtime as createdt5_1_0_,        orders0_.eight as eight6_1_0_,        orders0_.five as five7_1_0_,        orders0_.four as four8_1_0_,        orders0_.nine as nine9_1_0_,        orders0_.numberorder as numbero10_1_0_,        orders0_.one as one11_1_0_,        orders0_.seven as seven12_1_0_,        orders0_.six as six13_1_0_,        orders0_.ten as ten14_1_0_,        orders0_.tree as tree15_1_0_,        orders0_.two as two16_1_0_,       
+	items1_.orderid as orderid12_0_1_,        items1_.id as id1_0_1_,        items1_.id as id1_0_2_,        items1_.eight as eight2_0_2_,        items1_.five as five3_0_2_,        items1_.four as four4_0_2_,        items1_.nine as nine5_0_2_,        items1_.one as one6_0_2_,        items1_.orderid as orderid12_0_2_,        items1_.seven as seven7_0_2_,        items1_.six as six8_0_2_,        items1_.ten as ten9_0_2_,        items1_.tree as tree10_0_2_,        items1_.two as two11_0_2_     from        orders orders0_     left outer join        items items1_             on orders0_.id=items1_.orderid     where        orders0_.id=?Hibernate: 
+delete     from        items     where        id=?
+delete     from        items     where        id=?
+delete     from        items     where        id=?
+delete     from        items     where        id=?
+delete     from        items     where        id=?
+delete     from        orders     where        id=?
+
+## JPA Resultados
+2000 x 10
+
+
+## JDBI
+HikariProxyPreparedStatement@40092554 wrapping INSERT INTO orders(amount, one, two, tree, four, five, six, seven, eight, nine, ten, active, numberorder, createddate, createdtime)    VALUES ('10'::numeric, 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'TRUE', 100, '2020-07-23'::date, '2020-07-23 20:11:35.142489-03'::timestamp)RETURNING *
+HikariProxyPreparedStatement@1125030805 wrapping INSERT INTO items( orderid, one, two, tree, four, five, six, seven, eight, nine, ten)    VALUES (68, 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata')
+HikariProxyPreparedStatement@1125030805 wrapping INSERT INTO items( orderid, one, two, tree, four, five, six, seven, eight, nine, ten)    VALUES (68, 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata')
+HikariProxyPreparedStatement@1125030805 wrapping INSERT INTO items( orderid, one, two, tree, four, five, six, seven, eight, nine, ten)    VALUES (68, 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata')
+HikariProxyPreparedStatement@1125030805 wrapping INSERT INTO items( orderid, one, two, tree, four, five, six, seven, eight, nine, ten)    VALUES (68, 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata')
+HikariProxyPreparedStatement@1125030805 wrapping INSERT INTO items( orderid, one, two, tree, four, five, six, seven, eight, nine, ten)    VALUES (68, 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata')
+HikariProxyPreparedStatement@440102549 wrapping SELECT * FROM orders WHERE id = 68
+HikariProxyPreparedStatement@2039277489 wrapping UPDATE orders SET amount='10'::numeric, active='TRUE', createddate='2020-07-23'::date, createdtime= '2020-07-23 20:11:35.142489-03'::timestamp, numberorder=100, one='testedatatestedatatestedata', two='testedatatestedatatestedata', tree='testedatatestedatatestedata', four='testedatatestedatatestedata', five='testedatatestedatatestedata', six='testedatatestedatatestedata', seven='testedatatestedatatestedata', eight='testedatatestedatatestedata', nine='testedatatestedatatestedata', ten='testedatatestedatatestedata' WHERE id=68
+HikariProxyPreparedStatement@1274873783 wrapping DELETE FROM items WHERE orderid = 68
+HikariProxyPreparedStatement@180358540 wrapping DELETE FROM orders WHERE id = 68
+
+
+
+Transfer
+- dtTransferReference - repasse de fluxo D + 3 para tras, repasse de ciclo hoje para tras, antecipacao seria n dias configurado para seller para frente
+
+ErpDiaryTransfer
+- duedate - repasse 
+

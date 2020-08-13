@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -22,8 +24,12 @@ import java.util.Set;
 @NoArgsConstructor
 public class Order {
 
-    private String id;
+    private Long id;
     private BigDecimal amount;
+    private Boolean active;
+    private LocalDate createddate;
+    private LocalDateTime createdtime;
+    private Integer numberorder;
     private String one;
     private String two;
     private String tree;
@@ -34,6 +40,6 @@ public class Order {
     private String eight;
     private String nine;
     private String ten;
-    private List<Item> itens;
+    private List<Item> items;
 
 }

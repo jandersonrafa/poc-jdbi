@@ -1,6 +1,15 @@
+
+drop table jdbi.items ;
+drop table jdbi.orders ;
+
+
 CREATE TABLE jdbi.orders (
-	id varchar(36) NOT NULL,
+	id bigserial NOT NULL,
 	amount numeric NOT NULL,
+	active boolean NOT NULL,
+	createddate date NOT NULL,
+	createdtime timestamp NOT NULL,
+	numberorder integer NOT NULL,
 	one varchar(36)  NULL,
 	two varchar(36)  NULL,
 	tree varchar(36)  NULL,
@@ -14,11 +23,11 @@ CREATE TABLE jdbi.orders (
 	CONSTRAINT orders_pkey PRIMARY KEY (id)
 );
 
-
+GRANT ALL ON jdbi.orders TO jdbi
 
 CREATE TABLE jdbi.items (
-	id varchar(36) NOT NULL,
-	orderid varchar(36) NOT NULL,
+	id bigserial NOT NULL,
+	orderid bigint  NOT NULL,
 	one varchar(36)  NULL,
 	two varchar(36)  NULL,
 	tree varchar(36)  NULL,
@@ -30,7 +39,7 @@ CREATE TABLE jdbi.items (
 	nine varchar(36)  NULL,
 	ten varchar(36)  NULL,
 	CONSTRAINT items_pkey PRIMARY KEY (id),
-	constraint items_fkey foreign key (orderid) references orders (id)
+	constraint items_fkey foreign key (orderid) references jdbi.orders (id)
 );
 
 GRANT ALL ON jdbi.items TO jdbi

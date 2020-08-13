@@ -7,13 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Set;
 
-public interface OrderRepository extends CrudRepository<Orders, String> {
+public interface OrderRepository extends CrudRepository<Orders, Long> {
 
-    @Query(value = "SELECT id FROM orders")
-    Set<OrderPK> findAllIds();
-
-    @Data
-    public static class  OrderPK {
-        String id;
-    }
 }

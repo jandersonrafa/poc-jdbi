@@ -13,12 +13,9 @@ import java.util.List;
 @Repository
 public interface ItemRepository extends CrudRepository<Items, String > {
 
-    @Query("select * from Items i where i.orderid = :orderid")
-    List<Items> findByOrderid(@Param("orderid") String orderid);
-
     @Modifying
     @Transactional
     @Query("delete from Items u where u.orderid = :orderid")
-    int deleteByOrderid(@Param("orderid") String orderid);
+    int deleteByOrderid(@Param("orderid") Long orderid);
 
 }

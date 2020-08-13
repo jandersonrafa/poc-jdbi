@@ -6,18 +6,21 @@ import com.example.demo.model.Orders;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
 
 @Component
 public class OrderUtil {
 
-    public Orders createRandomOrderWith5Itens() {
-        double amount = ThreadLocalRandom.current().nextDouble(1000.00);
+    public Orders createRandomOrderWithItems(Integer items) {
         Orders orders = new Orders();
-        orders.setId(UUID.randomUUID().toString());
-        orders.setAmount(BigDecimal.valueOf(amount));
-        String randomData = getRandomString();
+        orders.setAmount(BigDecimal.TEN);
+        orders.setActive(true);
+        orders.setNumberorder(100);
+        orders.setCreateddate(LocalDate.now());
+        orders.setCreatedtime(LocalDateTime.now());
+        String randomData = "testedatatestedatatestedata";
         orders.setOne(randomData);
         orders.setTwo(randomData);
         orders.setTree(randomData);
@@ -28,29 +31,22 @@ public class OrderUtil {
         orders.setEight(randomData);
         orders.setNine(randomData);
         orders.setTen(randomData);
-        orders.setItens(getRandomItens(orders.getId()));
+        orders.setItems(getRandomItems(items));
         return orders;
     }
 
-    private String getRandomString() {
-        Random random = new Random();
-        return String.valueOf(random.nextLong());
-    }
-
-    public List<Items> getRandomItens(String orderId) {
+    public List<Items> getRandomItems(Integer items) {
         List<Items> itens = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            itens.add(newRandomItem(orderId));
+        for (int i = 0; i < items; i++) {
+            itens.add(newRandomItem());
         }
         return itens;
     }
 
-    public Items newRandomItem(String orderId) {
+    public Items newRandomItem() {
         Items items = new Items();
-        items.setId(UUID.randomUUID().toString());
-        String randomData = getRandomString();
+        String randomData = "testedatatestedatatestedata";
         items.setOne(randomData);
-        items.setOrderid(orderId);
         items.setTwo(randomData);
         items.setTree(randomData);
         items.setFour(randomData);

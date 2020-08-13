@@ -5,14 +5,14 @@
  */
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.domain.Persistable;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  *
@@ -23,11 +23,11 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Items implements Persistable {
+public class Items {
 
     @Id
-    private String id;
-    private String orderid;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String one;
     private String two;
     private String tree;
@@ -39,8 +39,9 @@ public class Items implements Persistable {
     private String nine;
     private String ten;
 
-    @Override
-    public boolean isNew() {
-        return true;
-    }
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="orderid")
+    @JsonIgnore
+    private Orders order;
+
 }

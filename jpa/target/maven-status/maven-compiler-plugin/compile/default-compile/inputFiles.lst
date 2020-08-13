@@ -3,5 +3,6 @@
 /home/janderson/colombo/others-projects/poc-jdbi/jpa/src/main/java/com/example/demo/model/Orders.java
 /home/janderson/colombo/others-projects/poc-jdbi/jpa/src/main/java/com/example/demo/datajdbc/repository/OrderRepository.java
 /home/janderson/colombo/others-projects/poc-jdbi/jpa/src/main/java/com/example/demo/datajdbc/repository/ItemRepository.java
+/home/janderson/colombo/others-projects/poc-jdbi/jpa/src/main/java/com/example/demo/service/OrderService.java
 /home/janderson/colombo/others-projects/poc-jdbi/jpa/src/main/java/com/example/demo/JpaApplication.java
 /home/janderson/colombo/others-projects/poc-jdbi/jpa/src/main/java/com/example/demo/model/Items.java

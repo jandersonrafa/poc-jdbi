@@ -22,22 +22,16 @@ import javax.sql.DataSource;
  * @author janderson
  */
 @Configuration
-public class PersistenceConfiguration {
-
-    @Autowired
-    private DataSource dataSource;
+public class RepositoryConfiguration {
 
     @Bean
-    public Jdbi jdbi(DataSource dataSource) {
-        // JDBI wants to control the Connection wrap the datasource in a proxy
-        // That is aware of the Spring managed transaction
-        TransactionAwareDataSourceProxy dataSourceProxy = new TransactionAwareDataSourceProxy(dataSource);
-        Jdbi jdbi = Jdbi.create(dataSourceProxy);
-        jdbi.installPlugins();
-        jdbi.registerRowMapper(Order.class, ConstructorMapper.of(Order.class));
-        jdbi.registerRowMapper(Item.class, ConstructorMapper.of(Item.class));
+    public OrderRepository orderRepository(Jdbi jdbi) {
+        return jdbi.onDemand(OrderRepository.class);
+    }
 
-        return jdbi;
+    @Bean
+    public ItemRepository itemRepository(Jdbi jdbi) {
+        return jdbi.onDemand(ItemRepository.class);
     }
 
 }

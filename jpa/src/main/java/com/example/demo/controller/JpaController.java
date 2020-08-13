@@ -5,22 +5,11 @@
  */
 package com.example.demo.controller;
 
-import com.example.demo.datajdbc.repository.ItemRepository;
-import com.example.demo.datajdbc.repository.OrderRepository;
-import com.example.demo.model.Items;
+import com.example.demo.repository.OrderRepository;
 import com.example.demo.model.Orders;
-import com.example.demo.service.OrderService;
 import com.example.demo.util.OrderUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StopWatch;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static java.util.stream.Collectors.toList;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author janderson
@@ -29,95 +18,33 @@ import static java.util.stream.Collectors.toList;
 @RequestMapping("/jpa")
 public class JpaController {
 
-    private static final int NUMBERS_ORDERS = 5000;
-
     @Autowired
     private OrderRepository orderRepository;
 
     @Autowired
-    private ItemRepository itemRepository;
-
-    @Autowired
     private OrderUtil orderUtil;
 
-    @Autowired
-    private OrderService orderService;
-
-    @GetMapping("/insert-batch")
-    public void insertBatch() {
-        run(() -> {
-            List<Orders> orders = new ArrayList<>();
-            List<Items> itens = new ArrayList<>();
-            System.out.println("# JPA - INSERT BATCH WITH NUMBER ORDERS= " + NUMBERS_ORDERS);
-            for (int i = 0; i < NUMBERS_ORDERS; i++) {
-                Orders order = orderUtil.createRandomOrderWith5Itens();
-                orders.add(order);
-                itens.addAll(order.getItens());
-            }
-            orderRepository.saveAll(orders);
-            itemRepository.saveAll(itens);
-        }, "insert-batch");
+    @GetMapping("/insert/{items}")
+    public Long insert(@PathVariable("items") Integer items) {
+        Orders order = orderUtil.createRandomOrderWithItems(items);
+        order.getItems().stream().forEach(it -> it.setOrder(order));
+        return orderRepository.save(order).getId();
     }
 
-    @GetMapping("/insert-all-one-by-one")
-    public void insertBatchAllOneByOne() {
-        run(() -> {
-            System.out.println("# JPA - INSERT BATCH WITH NUMBER ORDERS= " + NUMBERS_ORDERS);
-            for (int i = 0; i < NUMBERS_ORDERS; i++) {
-                Orders order = orderUtil.createRandomOrderWith5Itens();
-                orderRepository.save(order);
-                order.getItens().forEach(itemRepository::save);
-            }
-        }, "insert-all-one-by-one");
+    @GetMapping("/find/{id}")
+    public Orders find(@PathVariable("id") Long id) {
+       return orderRepository.findById(id).get();
     }
 
-    @GetMapping("/full-test")
-    public void fullTest() {
-        run(() -> {
-            for (int i = 0; i < NUMBERS_ORDERS; i++) {
-                Orders orders = orderUtil.createRandomOrderWith5Itens();
-                orderRepository.save(orders);
-                List<Items> items = itemRepository.saveAll(orders.getItens());
-                Orders ordersSaved = orderRepository.findById(orders.getId()).get();
-                ordersSaved.getId();
-                List<Items> byOrderid = itemRepository.findByOrderid(orders.getId());
-                byOrderid.forEach(Items::getId);
-                orderService.deleteAllOneByOne(orders.getId());
-            }
-        }, "full-test");
+    @PutMapping("/update")
+    public void update(@RequestBody Orders order) {
+        order.setItems(null);
+       orderRepository.save(order);
     }
 
-    @GetMapping("/select-all-one-by-one")
-    public void selectAllOneByOne() {
-        run(() -> {
-            List<String> orders = this.getOrderIds();
-            orders.forEach(o -> {
-                Orders order = orderRepository.findById(o).get();
-                List<Items> itens = itemRepository.findByOrderid(o);
-            });
-        }, "select-all-one-by-one");
+    @DeleteMapping("/delete/{id}")
+    public void delete(@PathVariable("id") Long id) {
+        orderRepository.deleteById(id);
     }
 
-    @GetMapping("/delete-all-one-by-one")
-    public void deleteAllOneByOne() {
-        List<String> orders = this.getOrderIds();
-        run(() -> {
-            orders.forEach(o -> {
-                orderService.deleteAllOneByOne(o);
-            });
-        }, "delete-all-one-by-one");
-    }
-
-    private List<String> getOrderIds() {
-        return orderRepository.findAllIds().stream().map(OrderRepository.OrderPK::getId).collect(toList());
-    }
-
-    private void run(Runnable run, String word) {
-        System.out.println("# JPA - " + word);
-        StopWatch stopWatch = new StopWatch();
-        stopWatch.start();
-        run.run();
-        stopWatch.stop();
-        System.out.println("# JPA - END " + word + " : " + stopWatch.getTotalTimeSeconds());
-    }
 }

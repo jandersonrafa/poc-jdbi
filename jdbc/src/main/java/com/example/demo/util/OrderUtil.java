@@ -1,67 +1,59 @@
 package com.example.demo.util;
-
-
 import com.example.demo.model.Item;
 import com.example.demo.model.Order;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
 
 @Component
 public class OrderUtil {
 
-
-    public Order createRandomOrderWith5Itens() {
-        double amount = ThreadLocalRandom.current().nextDouble(1000.00);
-        Order order = new Order();
-        order.setId(UUID.randomUUID().toString());
-        order.setAmount(BigDecimal.valueOf(amount));
-        String randomData = getRandomString();
-        order.setOne(randomData);
-        order.setTwo(randomData);
-        order.setTree(randomData);
-        order.setFour(randomData);
-        order.setFive(randomData);
-        order.setSix(randomData);
-        order.setSeven(randomData);
-        order.setEight(randomData);
-        order.setNine(randomData);
-        order.setTen(randomData);
-        order.setItens(getRandomItens(order.getId()));
-        return order;
+    public Order createRandomOrderWithItems(Integer items) {
+        Order orders = new Order();
+        orders.setAmount(BigDecimal.TEN);
+        orders.setActive(true);
+        orders.setNumberorder(100);
+        orders.setCreateddate(LocalDate.now());
+        orders.setCreatedtime(LocalDateTime.now());
+        String randomData = "testedatatestedatatestedata";
+        orders.setOne(randomData);
+        orders.setTwo(randomData);
+        orders.setTree(randomData);
+        orders.setFour(randomData);
+        orders.setFive(randomData);
+        orders.setSix(randomData);
+        orders.setSeven(randomData);
+        orders.setEight(randomData);
+        orders.setNine(randomData);
+        orders.setTen(randomData);
+        orders.setItems(getRandomItems(items));
+        return orders;
     }
 
-    private String getRandomString() {
-        Random random = new Random();
-        return String.valueOf(random.nextLong());
-    }
-
-    public List<Item> getRandomItens(String orderId) {
+    public List<Item> getRandomItems(Integer items) {
         List<Item> itens = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            itens.add(newRandomItem(orderId));
+        for (int i = 0; i < items; i++) {
+            itens.add(newRandomItem());
         }
         return itens;
     }
 
-    public Item newRandomItem(String orderId) {
-        Item item = new Item();
-        item.setId(UUID.randomUUID().toString());
-        String randomData = getRandomString();
-        item.setOne(randomData);
-        item.setOrderid(orderId);
-        item.setTwo(randomData);
-        item.setTree(randomData);
-        item.setFour(randomData);
-        item.setFive(randomData);
-        item.setSix(randomData);
-        item.setSeven(randomData);
-        item.setEight(randomData);
-        item.setNine(randomData);
-        item.setTen(randomData);
-        return item;
+    public Item newRandomItem() {
+        Item items = new Item();
+        String randomData = "testedatatestedatatestedata";
+        items.setOne(randomData);
+        items.setTwo(randomData);
+        items.setTree(randomData);
+        items.setFour(randomData);
+        items.setFive(randomData);
+        items.setSix(randomData);
+        items.setSeven(randomData);
+        items.setEight(randomData);
+        items.setNine(randomData);
+        items.setTen(randomData);
+        return items;
     }
-
 }

@@ -1,18 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.example.demo.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.jdbi.v3.core.mapper.reflect.JdbiConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 /**
  *
@@ -21,11 +18,15 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-//@AllArgsConstructor
+@AllArgsConstructor(onConstructor = @__({@JdbiConstructor}))
 public class Order {
 
-    private String id;
+    private Long id;
     private BigDecimal amount;
+    private Boolean active;
+    private LocalDate createddate;
+    private LocalDateTime createdtime;
+    private Integer numberorder;
     private String one;
     private String two;
     private String tree;
@@ -36,28 +37,6 @@ public class Order {
     private String eight;
     private String nine;
     private String ten;
-    private List<Item> itens;
-
-//    @JdbiConstructor
-    public Order(String id, BigDecimal amount) {
-        this.id = id;
-        this.amount = amount;
-    }
-
-    @JdbiConstructor
-    public Order(String id, BigDecimal amount, String one, String two, String tree, String four, String five, String six, String seven, String eight, String nine, String ten) {
-        this.id = id;
-        this.amount = amount;
-        this.one = one;
-        this.two = two;
-        this.tree = tree;
-        this.four = four;
-        this.five = five;
-        this.six = six;
-        this.seven = seven;
-        this.eight = eight;
-        this.nine = nine;
-        this.ten = ten;
-    }
+    private List<Item> items;
 
 }

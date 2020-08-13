@@ -18,8 +18,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Item {
 
-    private String id;
-    private String orderid;
+    private Long id;
+    private Long orderid;
     private String one;
     private String two;
     private String tree;

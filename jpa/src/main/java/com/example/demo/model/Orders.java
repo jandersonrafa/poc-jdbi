@@ -9,16 +9,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.dom4j.Branch;
 import org.springframework.data.domain.Persistable;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- *
  * @author janderson
  */
 @Getter
@@ -26,11 +26,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Orders  implements Persistable {
+public class Orders {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private BigDecimal amount;
+    private Boolean active;
+    private LocalDate createddate;
+    private LocalDateTime createdtime;
+    private Integer numberorder;
     private String one;
     private String two;
     private String tree;
@@ -42,11 +47,10 @@ public class Orders  implements Persistable {
     private String nine;
     private String ten;
 
-    @Transient
-    private List<Items> itens;
-
-    @Override
-    public boolean isNew() {
-        return true;
-    }
+    @OneToMany(
+            mappedBy = "order",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
+    )
+    private List<Items> items;
 }

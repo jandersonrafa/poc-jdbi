@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>poc-jpa</artifactId>
+    <artifactId>poc-spring-data-jdbc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>poc-spring-data-jdbc</name>
     <description>Demo poc-spring-data-jdbc project for Spring Boot</description>

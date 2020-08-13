@@ -21,11 +21,11 @@ import org.springframework.data.domain.Persistable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Items implements Persistable {
+public class Items {
 
     @Id
-    private String id;
-    private String orderid;
+    private Long id;
+    private Long orderid;
     private String one;
     private String two;
     private String tree;
@@ -37,8 +37,4 @@ public class Items implements Persistable {
     private String nine;
     private String ten;
 
-    @Override
-    public boolean isNew() {
-        return true;
-    }
 }
