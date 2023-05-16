@@ -3,27 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.demo.jdbi.controller;
+package com.example.demo.mybatis.controller;
 
-import com.example.demo.jdbi.repository.ItemRepository;
-import com.example.demo.jdbi.repository.OrderRepository;
-import com.example.demo.model.Item;
+import com.example.demo.mybatis.repository.ItemRepository;
+import com.example.demo.mybatis.repository.OrderRepository;
 import com.example.demo.model.Order;
 import com.example.demo.util.OrderUtil;
-import org.jdbi.v3.core.Handle;
-import org.jdbi.v3.core.Jdbi;
-import org.jdbi.v3.core.statement.PreparedBatch;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
-import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.*;
-
-import javax.sql.DataSource;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 /**
  * @author janderson

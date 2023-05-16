@@ -3,10 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.demo.jdbi.config;
+package com.example.demo.mybatis.config;
 
-import com.example.demo.jdbi.repository.ItemRepository;
-import com.example.demo.jdbi.repository.OrderRepository;
 import com.example.demo.model.Item;
 import com.example.demo.model.Order;
 import org.jdbi.v3.core.Jdbi;

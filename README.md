@@ -43,3 +43,5 @@ CREATE TABLE jdbi.items (
 );
 
 GRANT ALL ON jdbi.items TO jdbi
+GRANT ALL ON jdbi.items_id_seq TO jdbi
+GRANT ALL ON jdbi.orders_id_seq TO jdbi

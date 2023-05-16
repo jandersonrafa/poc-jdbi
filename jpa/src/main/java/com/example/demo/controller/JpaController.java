@@ -11,6 +11,19 @@ import com.example.demo.util.OrderUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+
+HikariProxyPreparedStatement@1448986731 wrapping INSERT INTO orders(amount, one, two, tree, four, five, six, seven, eight, nine, ten, active, numberorder, createddate, createdtime)    VALUES ('10'::numeric, 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'testedatatestedatatestedata', 'TRUE', 100, '2020-08-19'::date, '2020-08-19 00:51:30.046542-03'::timestamp)
+RETURNING *
+
+
+   insert 
+    into
+        orders
+        (active, amount, createddate, createdtime, eight, five, four, nine, numberorder, one, seven, six, ten, tree, two) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+
+
 /**
  * @author janderson
  */
