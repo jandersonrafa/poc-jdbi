@@ -1,4 +1,4 @@
-package com.example.demo.dto;
+package com.example.demo.model;
 
 import com.example.demo.modelgenerate.tables.pojos.Items;
 import com.example.demo.modelgenerate.tables.pojos.Orders;

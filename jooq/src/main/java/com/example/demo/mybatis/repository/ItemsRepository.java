@@ -1,15 +1,13 @@
-package com.example.demo.jooq.repository;
+package com.example.demo.mybatis.repository;
 
 import com.example.demo.modelgenerate.tables.daos.ItemsDao;
 import com.example.demo.modelgenerate.tables.pojos.Items;
-import com.example.demo.modelgenerate.tables.pojos.Orders;
 import com.example.demo.modelgenerate.tables.records.ItemsRecord;
 import lombok.RequiredArgsConstructor;
 import org.jooq.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.example.demo.modelgenerate.Tables.ITEMS;
 

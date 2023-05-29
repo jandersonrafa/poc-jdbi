@@ -1,7 +1,6 @@
-package com.example.demo.jooq.repository;
+package com.example.demo.mybatis.repository;
 
-import com.example.demo.dto.OrderDto;
-import com.example.demo.modelgenerate.tables.daos.ItemsDao;
+import com.example.demo.model.OrderDto;
 import com.example.demo.modelgenerate.tables.pojos.Items;
 import com.example.demo.util.OrderUtil;
 import org.junit.jupiter.api.Test;
