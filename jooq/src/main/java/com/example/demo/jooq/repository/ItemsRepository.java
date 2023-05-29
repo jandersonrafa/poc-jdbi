@@ -1,4 +1,4 @@
-package com.example.demo.mybatis.repository;
+package com.example.demo.jooq.repository;
 
 import com.example.demo.modelgenerate.tables.daos.ItemsDao;
 import com.example.demo.modelgenerate.tables.pojos.Items;

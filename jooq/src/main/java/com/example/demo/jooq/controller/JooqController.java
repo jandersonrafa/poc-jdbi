@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.demo.mybatis.controller;
+package com.example.demo.jooq.controller;
 
-import com.example.demo.model.OrderDto;
-import com.example.demo.mybatis.repository.ItemsRepository;
-import com.example.demo.mybatis.repository.OrdersRepository;
+import com.example.demo.dto.OrderDto;
+import com.example.demo.jooq.repository.ItemsRepository;
+import com.example.demo.jooq.repository.OrdersRepository;
 import com.example.demo.modelgenerate.tables.pojos.Orders;
 import com.example.demo.util.OrderUtil;
 import lombok.RequiredArgsConstructor;

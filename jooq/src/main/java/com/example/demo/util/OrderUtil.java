@@ -1,7 +1,7 @@
 package com.example.demo.util;
 
 
-import com.example.demo.model.OrderDto;
+import com.example.demo.dto.OrderDto;
 import com.example.demo.modelgenerate.tables.pojos.Items;
 import com.example.demo.modelgenerate.tables.pojos.Orders;
 import org.springframework.stereotype.Component;
