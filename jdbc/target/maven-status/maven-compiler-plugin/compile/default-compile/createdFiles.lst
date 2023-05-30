@@ -1,10 +1,8 @@
-com/example/demo/datajdbc/repository/ItemRepository$1.class
-com/example/demo/datajdbc/repository/OrderRepository$1.class
 com/example/demo/model/Order.class
 com/example/demo/util/OrderUtil.class
 com/example/demo/controller/JdbcController.class
 com/example/demo/JdbcApplication.class
 com/example/demo/model/Item.class
-com/example/demo/datajdbc/repository/ItemRepository.class
-com/example/demo/datajdbc/repository/OrderRepository.class
+com/example/demo/repository/OrderRepository.class
+com/example/demo/repository/ItemRepository.class
 com/example/demo/jdbi/config/JdbcPersistenceConfiguration.class

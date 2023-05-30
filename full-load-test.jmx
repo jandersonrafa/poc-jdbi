@@ -51,7 +51,7 @@
           </collectionProp>
         </Arguments>
         <hashTree/>
-        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="mybatis" enabled="true">
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="mybatis" enabled="false">
           <collectionProp name="Arguments.arguments">
             <elementProp name="port" elementType="Argument">
               <stringProp name="Argument.name">port</stringProp>
@@ -96,7 +96,7 @@
           </collectionProp>
         </Arguments>
         <hashTree/>
-        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="jpa" enabled="false">
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="jpa" enabled="true">
           <collectionProp name="Arguments.arguments">
             <elementProp name="port" elementType="Argument">
               <stringProp name="Argument.name">port</stringProp>

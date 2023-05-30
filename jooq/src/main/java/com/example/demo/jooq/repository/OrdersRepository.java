@@ -1,11 +1,15 @@
 package com.example.demo.jooq.repository;
 
 import com.example.demo.modelgenerate.tables.daos.OrdersDao;
+import com.example.demo.modelgenerate.tables.pojos.Items;
 import com.example.demo.modelgenerate.tables.pojos.Orders;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.Result;
 import org.springframework.stereotype.Repository;
 
+import static com.example.demo.modelgenerate.Tables.ITEMS;
 import static com.example.demo.modelgenerate.Tables.ORDERS;
 
 @Repository
@@ -37,6 +41,14 @@ public class OrdersRepository {
 
     public Orders findById(Long id) {
         return ordersDao.findById(id);
+    }
+    public Orders findAllById(Long id) {
+        Result<Record> fetch = context.select()
+                .from(ORDERS.join(ITEMS).on(ORDERS.ID.eq(ITEMS.ORDERID)))
+                .where(ORDERS.ID.eq(id))
+
+                .fetch();
+        return null;
     }
 
     public void update(Orders order) {

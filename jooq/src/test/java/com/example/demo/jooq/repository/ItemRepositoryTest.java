@@ -2,6 +2,7 @@ package com.example.demo.jooq.repository;
 
 import com.example.demo.dto.OrderDto;
 import com.example.demo.modelgenerate.tables.pojos.Items;
+import com.example.demo.modelgenerate.tables.pojos.Orders;
 import com.example.demo.util.OrderUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,20 @@ class ItemRepositoryTest {
     @Autowired
     private OrderUtil orderUtil;
 
+    @Test
+    public void insertBean2() {
+        // Arramge
+        OrderDto order = orderUtil.createRandomOrderWithItems(5);
+        Long id = ordersRepository.insert(order.getOrder());
+        order.getItems().stream().forEach(it -> it.setOrderid(id));
+
+        // Act
+        itemsRepository.insert(order.getItems());
+
+        // Assert
+        Orders allById = ordersRepository.findAllById(id);
+        assertEquals(1,2);
+    }
     @Test
     public void insertBean() {
         // Arramge

@@ -11,7 +11,7 @@
     <groupId>com.example</groupId>
     <artifactId>poc-mybatis</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>poc-jdbi</name>
+    <name>poc-mybatis</name>
     <description>Demo poc-mybatis project for Spring Boot</description>
 
     <properties>

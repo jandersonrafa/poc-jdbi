@@ -11,7 +11,7 @@
     <groupId>com.example</groupId>
     <artifactId>poc-jooq</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>poc-jdbi</name>
+    <name>poc-jooq</name>
     <description>Demo poc-jooq project for Spring Boot</description>
 
     <properties>

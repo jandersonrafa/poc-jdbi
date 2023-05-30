@@ -6,17 +6,23 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="poc-jdbi" />
+        <module name="poc-spring-data-jdbc" />
         <module name="poc-jooq" />
+        <module name="poc-mybatis" />
+        <module name="poc-jdbc" />
+        <module name="poc-jpa" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="poc-mybatis" target="17" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="poc-jdbc" options="-parameters" />
+      <module name="poc-jdbi" options="-parameters" />
       <module name="poc-jooq" options="-parameters" />
+      <module name="poc-jpa" options="-parameters" />
       <module name="poc-mybatis" options="-parameters" />
+      <module name="poc-spring-data-jdbc" options="-parameters" />
     </option>
   </component>
 </project>
